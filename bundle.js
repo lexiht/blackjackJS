@@ -65,9 +65,194 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-console.log('Hello');
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__blackjack__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__player__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__deck__ = __webpack_require__(4);
+
+
+
+
+
+$(document).ready(() => {
+  let human = new __WEBPACK_IMPORTED_MODULE_2__player__["a" /* Player */]('human');
+  let computer = new __WEBPACK_IMPORTED_MODULE_2__player__["a" /* Player */]('computer');
+  let cards = Object(__WEBPACK_IMPORTED_MODULE_3__deck__["c" /* shuffle */])(Object.keys(Object(__WEBPACK_IMPORTED_MODULE_3__deck__["b" /* populateCards */])()));
+
+  $("#start").click(() => {
+    $("#start").hide();
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].start(human, computer, cards);
+    $("h4").show();
+  });
+});
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__blackjack__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__deck__ = __webpack_require__(4);
+// this module holds the interaction between players and the game
+
+
+
+
+const game = {
+  start: (human, computer, cards) => {
+    for (let i = 0; i < 2; i++) {
+      human.hand.push(Object(__WEBPACK_IMPORTED_MODULE_1__deck__["a" /* deal */])(cards));
+      computer.hand.push(Object(__WEBPACK_IMPORTED_MODULE_1__deck__["a" /* deal */])(cards));
+    }
+  }
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = game;
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// this module holds logic that only applicable for blackjack game.
+
+const addPointBasedOnCards = (values) => {
+  let currentTotal = 0;
+  values.forEach((value) => {
+    if (value === 'A') {
+      currentTotal += 11;
+    } else if (['J', 'Q', 'K'].includes(value)) {
+      currentTotal += 10;
+    } else {
+      currentTotal += +value;
+    }
+  })
+  return currentTotal;
+};
+/* unused harmony export addPointBasedOnCards */
+
+
+const calculateTotal = (cards) => {
+  let values = cards.map((value) => {
+    return value.slice(1);
+  });
+  let allACards = values.filter((value) => {
+    return value === 'A';
+  });
+  let total = addPointBasedOnCards(values);
+  for (let i = 0; i < allACards.length; i++) {
+    if (total > 21) {
+      total -= 10;
+    }
+  }
+  return total;
+};
+/* unused harmony export calculateTotal */
+
+
+const checkForEarlyFinish = (humanTotal, computerTotal) => {
+  if (humanTotal > 21) {
+    return 'Sorry, you busted.';
+  } else if (computerTotal > 21){
+    return 'Congrats! You have won, the computer busted.';
+  } else if (humanTotal === 21) {
+    return 'Congrats! You have won.';
+  } else if (computerTotal === 21) {
+    return 'Sorry, the computer have won.';
+  } else {
+    return;
+  }
+};
+/* unused harmony export checkForEarlyFinish */
+
+
+const gameoverAnnouncement = (humanTotal, computerTotal) => {
+  if (computerTotal < humanTotal && humanTotal < 21 ) {
+    return 'Congrats! You have won.';
+  } else if (computerTotal > humanTotal && computerTotal < 21) {
+    return 'Sorry, the computer has won.';
+  } else if (computerTotal === humanTotal) {
+    return 'It\'s a draw';
+  } else {
+    return;
+  }
+};
+/* unused harmony export gameoverAnnouncement */
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* this class is created based on the assumption that dealer is
+  the computer, the player is playing against with. They're all
+  player at the end of the day and holds the same state.
+*/
+
+class Player {
+  constructor(props){
+    this.id = props;
+    this.hand = [];
+    this.total = 0;
+  }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Player;
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* this module holds functions for creating and shuffling a deck of
+  cards and can be reuse in any other 52 cards game, not just for blackjack. 
+*/
+
+const populateCards = () => {
+  const suits = {
+    'H': 'hearts',
+    'D': 'diamonds',
+    'S': 'spades',
+    'C': 'clubs'
+  };
+  let cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
+  let deckOfCards = {}
+  for (let letter in suits) {
+    for (let value of cards) {
+      deckOfCards[letter + value] = `../cards/${suits[letter]}_${value}.jpg`;
+    }
+  }
+  return deckOfCards;
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = populateCards;
+
+
+const shuffle = (cards) => {
+  for (let i = cards.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = cards[i];
+    cards[i] = cards[j];
+    cards[j] = temp;
+  }
+  return cards;
+};
+/* harmony export (immutable) */ __webpack_exports__["c"] = shuffle;
+
+
+const deal = (cards) => {
+  return cards.pop();
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = deal;
+
 
 
 /***/ })
