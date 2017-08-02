@@ -1,3 +1,7 @@
+/* this module holds functions for creating and shuffling a deck of
+  cards and can be reuse in any other 52 cards game, not just for blackjack. 
+*/
+
 export const populateCards = () => {
   const suits = {
     'H': 'hearts',
@@ -13,4 +17,18 @@ export const populateCards = () => {
     }
   }
   return deckOfCards;
+};
+
+export const shuffle = (cards) => {
+  for (let i = cards.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = cards[i];
+    cards[i] = cards[j];
+    cards[j] = temp;
+  }
+  return cards;
+};
+
+export const deal = (cards) => {
+  return cards.pop();
 };
