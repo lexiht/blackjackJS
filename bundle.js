@@ -114,6 +114,7 @@ $(document).ready(() => {
     console.log(computer.total);
     __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].computerHit(computer, cards);
     __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].isGameOver(human, computer);
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].finalResults(human, computer);
   });
 });
 
@@ -177,12 +178,18 @@ const game = {
     return false;
   },
   computerHit(computer, cards) {
-    if (computer.total < 17 && this.hasStick) {
+    if (computer.total < 18 && this.hasStick) {
       this.hit(computer.hand, cards);
       computer.total = Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["a" /* calculateTotal */])(computer.hand);
       console.log(computer.total);
     }
     this.showCardsExceptLastCards(computer.hand, computer.id);
+  },
+  finalResults(human, computer) {
+    computer.total = Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["a" /* calculateTotal */])(computer.hand);
+    human.total = Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["a" /* calculateTotal */])(human.hand);
+    $("#announcement").append(Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["c" /* gameoverAnnouncement */])(human.total, computer.total));
+    this.showAllCards(computer.hand, computer.id);
   }
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = game;
@@ -257,7 +264,7 @@ const gameoverAnnouncement = (humanTotal, computerTotal) => {
     return;
   }
 };
-/* unused harmony export gameoverAnnouncement */
+/* harmony export (immutable) */ __webpack_exports__["c"] = gameoverAnnouncement;
 
 
 

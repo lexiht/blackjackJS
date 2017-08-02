@@ -39,5 +39,6 @@ $(document).ready(() => {
     console.log(computer.total);
     game.computerHit(computer, cards);
     game.isGameOver(human, computer);
+    game.finalResults(human, computer);
   });
 });
