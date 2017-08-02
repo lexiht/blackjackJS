@@ -28,4 +28,18 @@ export const calculateTotal = (cards) => {
     }
   }
   return total;
-}
+};
+
+export const checkForEarlyFinish = (humanTotal, computerTotal) => {
+  if (humanTotal > 21) {
+    return 'Sorry, you busted.';
+  } else if (computerTotal > 21){
+    return 'Congrats! You have won, the computer busted.';
+  } else if (humanTotal === 21) {
+    return 'Congrats! You have won.';
+  } else if (computerTotal === 21) {
+    return 'Sorry, the computer have won.';
+  } else {
+    return;
+  }
+};
