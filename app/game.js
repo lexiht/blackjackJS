@@ -1,5 +1,3 @@
-// this module holds the interaction between players and the game
-
 import { addPointBasedOnCards, calculateTotal, checkForEarlyFinish, gameoverAnnouncement } from './blackjack';
 import { populateCards, shuffle, deal } from './deck';
 

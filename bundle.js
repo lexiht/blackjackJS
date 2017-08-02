@@ -126,8 +126,6 @@ $(document).ready(() => {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__blackjack__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__deck__ = __webpack_require__(4);
-// this module holds the interaction between players and the game
-
 
 
 
@@ -201,8 +199,6 @@ const game = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// this module holds logic that only applicable for blackjack game.
-
 const addPointBasedOnCards = (values) => {
   let currentTotal = 0;
   values.forEach((value) => {
@@ -273,11 +269,6 @@ const gameoverAnnouncement = (humanTotal, computerTotal) => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* this class is created based on the assumption that dealer is
-  the computer, the player is playing against with. They're all
-  player at the end of the day and holds the same state.
-*/
-
 class Player {
   constructor(props){
     this.id = props;
@@ -294,10 +285,6 @@ class Player {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* this module holds functions for creating and shuffling a deck of
-  cards and can be reuse in any other 52 cards game, not just for blackjack.
-*/
-
 const populateCards = () => {
   const suits = {
     'H': 'hearts',

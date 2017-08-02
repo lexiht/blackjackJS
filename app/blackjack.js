@@ -1,5 +1,3 @@
-// this module holds logic that only applicable for blackjack game.
-
 export const addPointBasedOnCards = (values) => {
   let currentTotal = 0;
   values.forEach((value) => {

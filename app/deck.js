@@ -1,7 +1,3 @@
-/* this module holds functions for creating and shuffling a deck of
-  cards and can be reuse in any other 52 cards game, not just for blackjack.
-*/
-
 export const populateCards = () => {
   const suits = {
     'H': 'hearts',
