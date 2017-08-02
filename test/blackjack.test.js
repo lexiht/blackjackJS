@@ -1,4 +1,4 @@
-import { addPointBasedOnCards } from '../app/blackjack';
+import { addPointBasedOnCards, calculateTotal } from '../app/blackjack';
 
 test('adds 11 points when A value and total < 21', () => {
   expect(addPointBasedOnCards(['A'])).toEqual(11);
@@ -16,4 +16,16 @@ test('adds points to normal card value', () => {
 
 test('adds points to normal card value', () => {
   expect(addPointBasedOnCards([3, 5])).toEqual(8);
+});
+
+test('2 cards of A should only add 11 points once, the rest is 1 point', () => {
+  expect(calculateTotal(['DA', 'CA'])).toEqual(12);
+});
+
+test('3 cards of A should only add 11 points once, the rest is 1 point', () => {
+  expect(calculateTotal(['DA', 'CA', 'SA'])).toEqual(13);
+});
+
+test('calculates the total of all cards', () => {
+  expect(calculateTotal(['DA', 'H2', 'CA', 'SK'])).toEqual(14);
 });
