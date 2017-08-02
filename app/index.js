@@ -22,4 +22,12 @@ $(document).ready(() => {
     computer.total = calculateTotal(computer.hand);
     game.isGameOver(human, computer);
   });
+
+  $("#hit").click(() => {
+    game.hit(human.hand, cards);
+    game.showAllCards(human.hand, human.id);
+    human.total = calculateTotal(human.hand);
+    $("#score").empty().append(`Your current total is ${human.total}`);
+    game.isGameOver(human, computer);
+  });
 });

@@ -97,6 +97,14 @@ $(document).ready(() => {
     computer.total = Object(__WEBPACK_IMPORTED_MODULE_1__blackjack__["a" /* calculateTotal */])(computer.hand);
     __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].isGameOver(human, computer);
   });
+
+  $("#hit").click(() => {
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].hit(human.hand, cards);
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].showAllCards(human.hand, human.id);
+    human.total = Object(__WEBPACK_IMPORTED_MODULE_1__blackjack__["a" /* calculateTotal */])(human.hand);
+    $("#score").empty().append(`Your current total is ${human.total}`);
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].isGameOver(human, computer);
+  });
 });
 
 
@@ -140,6 +148,9 @@ const game = {
         $(`#${card}`).attr("src", Object(__WEBPACK_IMPORTED_MODULE_1__deck__["b" /* populateCards */])()[card]);
       }
     }
+  },
+  hit: (playerHand, cards) => {
+    playerHand.push(Object(__WEBPACK_IMPORTED_MODULE_1__deck__["a" /* deal */])(cards));
   },
   isGameOver(human, computer) {
     if (Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["b" /* checkForEarlyFinish */])(human.total, computer.total) !== undefined) {

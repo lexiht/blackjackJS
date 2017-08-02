@@ -32,6 +32,9 @@ export const game = {
       }
     }
   },
+  hit: (playerHand, cards) => {
+    playerHand.push(deal(cards));
+  },
   isGameOver(human, computer) {
     if (checkForEarlyFinish(human.total, computer.total) !== undefined) {
       $("#announcement").append(checkForEarlyFinish(human.total, computer.total));
