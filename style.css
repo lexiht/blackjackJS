@@ -6,3 +6,11 @@ ul li {
   display: inline;
   list-style-type: none;
 }
+
+#announcement, #score {
+  font-size: 25px;
+}
+
+h4 {
+  font-size: 20px;
+}
