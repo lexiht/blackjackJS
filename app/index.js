@@ -13,5 +13,6 @@ $(document).ready(() => {
     game.start(human, computer, cards);
     $("h4").show();
     game.showAllCards(human.hand, human.id);
+    game.showCardsExceptLastCards(computer.hand, computer.id);
   });
 });

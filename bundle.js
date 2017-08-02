@@ -88,6 +88,7 @@ $(document).ready(() => {
     __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].start(human, computer, cards);
     $("h4").show();
     __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].showAllCards(human.hand, human.id);
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].showCardsExceptLastCards(computer.hand, computer.id);
   });
 });
 
@@ -118,6 +119,19 @@ const game = {
       let card = playerHand[i];
       $(`#${id} li`).append(`<img id=\"${card}\" />`);
       $(`#${card}`).attr("src", Object(__WEBPACK_IMPORTED_MODULE_1__deck__["b" /* populateCards */])()[card]);
+    }
+  },
+  showCardsExceptLastCards: (computerHand, id) => {
+    $(`#${id}`).append("<li></li>");
+
+    for (let i = 0; i < computerHand.length; i++) {
+      let card = computerHand[i];
+      $(`#${id} li`).append(`<img id=\"${card}\" />`);
+      if (i === (computerHand.length - 1)) {
+        $(`#${card}`).attr("src", "./cards/cover.jpg");
+      } else {
+        $(`#${card}`).attr("src", Object(__WEBPACK_IMPORTED_MODULE_1__deck__["b" /* populateCards */])()[card]);
+      }
     }
   }
 };

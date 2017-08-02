@@ -18,5 +18,18 @@ export const game = {
       $(`#${id} li`).append(`<img id=\"${card}\" />`);
       $(`#${card}`).attr("src", populateCards()[card]);
     }
+  },
+  showCardsExceptLastCards: (computerHand, id) => {
+    $(`#${id}`).append("<li></li>");
+
+    for (let i = 0; i < computerHand.length; i++) {
+      let card = computerHand[i];
+      $(`#${id} li`).append(`<img id=\"${card}\" />`);
+      if (i === (computerHand.length - 1)) {
+        $(`#${card}`).attr("src", "./cards/cover.jpg");
+      } else {
+        $(`#${card}`).attr("src", populateCards()[card]);
+      }
+    }
   }
 };
