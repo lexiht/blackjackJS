@@ -9,5 +9,14 @@ export const game = {
       human.hand.push(deal(cards));
       computer.hand.push(deal(cards));
     }
+  },
+  showAllCards: (playerHand, id) => {
+    $(`#${id}`).append("<li></li>");
+
+    for (let i = 0; i < playerHand.length; i++) {
+      let card = playerHand[i];
+      $(`#${id} li`).append(`<img id=\"${card}\" />`);
+      $(`#${card}`).attr("src", populateCards()[card]);
+    }
   }
 };

@@ -12,5 +12,6 @@ $(document).ready(() => {
     $("#start").hide();
     game.start(human, computer, cards);
     $("h4").show();
+    game.showAllCards(human.hand, human.id);
   });
 });

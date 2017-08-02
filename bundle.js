@@ -87,6 +87,7 @@ $(document).ready(() => {
     $("#start").hide();
     __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].start(human, computer, cards);
     $("h4").show();
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].showAllCards(human.hand, human.id);
   });
 });
 
@@ -108,6 +109,15 @@ const game = {
     for (let i = 0; i < 2; i++) {
       human.hand.push(Object(__WEBPACK_IMPORTED_MODULE_1__deck__["a" /* deal */])(cards));
       computer.hand.push(Object(__WEBPACK_IMPORTED_MODULE_1__deck__["a" /* deal */])(cards));
+    }
+  },
+  showAllCards: (playerHand, id) => {
+    $(`#${id}`).append("<li></li>");
+
+    for (let i = 0; i < playerHand.length; i++) {
+      let card = playerHand[i];
+      $(`#${id} li`).append(`<img id=\"${card}\" />`);
+      $(`#${card}`).attr("src", Object(__WEBPACK_IMPORTED_MODULE_1__deck__["b" /* populateCards */])()[card]);
     }
   }
 };
@@ -214,7 +224,7 @@ class Player {
 
 "use strict";
 /* this module holds functions for creating and shuffling a deck of
-  cards and can be reuse in any other 52 cards game, not just for blackjack. 
+  cards and can be reuse in any other 52 cards game, not just for blackjack.
 */
 
 const populateCards = () => {
@@ -228,7 +238,7 @@ const populateCards = () => {
   let deckOfCards = {}
   for (let letter in suits) {
     for (let value of cards) {
-      deckOfCards[letter + value] = `../cards/${suits[letter]}_${value}.jpg`;
+      deckOfCards[letter + value] = `./cards/${suits[letter]}_${value}.jpg`;
     }
   }
   return deckOfCards;

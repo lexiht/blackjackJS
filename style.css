@@ -1,0 +1,8 @@
+button {
+  cursor: pointer;
+}
+
+ul li {
+  display: inline;
+  list-style-type: none;
+}

@@ -1,5 +1,5 @@
 /* this module holds functions for creating and shuffling a deck of
-  cards and can be reuse in any other 52 cards game, not just for blackjack. 
+  cards and can be reuse in any other 52 cards game, not just for blackjack.
 */
 
 export const populateCards = () => {
@@ -13,7 +13,7 @@ export const populateCards = () => {
   let deckOfCards = {}
   for (let letter in suits) {
     for (let value of cards) {
-      deckOfCards[letter + value] = `../cards/${suits[letter]}_${value}.jpg`;
+      deckOfCards[letter + value] = `./cards/${suits[letter]}_${value}.jpg`;
     }
   }
   return deckOfCards;
