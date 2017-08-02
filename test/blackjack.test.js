@@ -1,4 +1,4 @@
-import { addPointBasedOnCards, calculateTotal, checkForEarlyFinish } from '../app/blackjack';
+import { addPointBasedOnCards, calculateTotal, checkForEarlyFinish, gameoverAnnouncement } from '../app/blackjack';
 
 describe('should add correct points based on cards', () => {
   test('adds 11 points when A value and total < 21', () => {
@@ -69,6 +69,32 @@ describe('is gameover?', () => {
       humanTotal = 19;
       computerTotal = 18;
       expect(checkForEarlyFinish(humanTotal, computerTotal)).toEqual(undefined);
+    });
+  });
+
+  describe('announcement winner when gameover', () => {
+    test('return message when humanTotal > computerTotal', () => {
+      humanTotal = 19;
+      computerTotal = 18;
+      expect(gameoverAnnouncement(humanTotal, computerTotal)).toEqual('Congrats! You have won.');
+    });
+
+    test('return message when humanTotal < computerTotal', () => {
+      humanTotal = 18;
+      computerTotal = 19;
+      expect(gameoverAnnouncement(humanTotal, computerTotal)).toEqual('Sorry, the computer has won.');
+    });
+
+    test('return message when humanTotal === computerTotal', () => {
+      humanTotal = 18;
+      computerTotal = 18;
+      expect(gameoverAnnouncement(humanTotal, computerTotal)).toEqual('It\'s a draw');
+    });
+
+    test('return undefined when humanTotal > 21', () => {
+      humanTotal = 22;
+      computerTotal = 18;
+      expect(gameoverAnnouncement(humanTotal, computerTotal)).toEqual(undefined);
     });
   });
 });

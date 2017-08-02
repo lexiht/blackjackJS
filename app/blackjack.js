@@ -43,3 +43,15 @@ export const checkForEarlyFinish = (humanTotal, computerTotal) => {
     return;
   }
 };
+
+export const gameoverAnnouncement = (humanTotal, computerTotal) => {
+  if (computerTotal < humanTotal && humanTotal < 21 ) {
+    return 'Congrats! You have won.';
+  } else if (computerTotal > humanTotal && computerTotal < 21) {
+    return 'Sorry, the computer has won.';
+  } else if (computerTotal === humanTotal) {
+    return 'It\'s a draw';
+  } else {
+    return;
+  }
+};
