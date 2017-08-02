@@ -30,4 +30,14 @@ $(document).ready(() => {
     $("#score").empty().append(`Your current total is ${human.total}`);
     game.isGameOver(human, computer);
   });
+
+  $("#stick").click(() => {
+    game.stick(human);
+    $("#score").empty().append(`Your final total is ${human.total}`);
+    $("#buttons").hide();
+    game.showAllCards(computer.hand, computer.id);
+    console.log(computer.total);
+    game.computerHit(computer, cards);
+    game.isGameOver(human, computer);
+  });
 });

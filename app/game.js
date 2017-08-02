@@ -4,6 +4,7 @@ import { addPointBasedOnCards, calculateTotal, checkForEarlyFinish, gameoverAnno
 import { populateCards, shuffle, deal } from './deck';
 
 export const game = {
+  hasStick: false,
   start: (human, computer, cards) => {
     for (let i = 0; i < 2; i++) {
       human.hand.push(deal(cards));
@@ -35,6 +36,10 @@ export const game = {
   hit: (playerHand, cards) => {
     playerHand.push(deal(cards));
   },
+  stick(human, hasStick) {
+    human.total = calculateTotal(human.hand);
+    this.hasStick = true;
+  },
   isGameOver(human, computer) {
     if (checkForEarlyFinish(human.total, computer.total) !== undefined) {
       $("#announcement").append(checkForEarlyFinish(human.total, computer.total));
@@ -44,4 +49,12 @@ export const game = {
     }
     return false;
   },
+  computerHit(computer, cards) {
+    if (computer.total < 17 && this.hasStick) {
+      this.hit(computer.hand, cards);
+      computer.total = calculateTotal(computer.hand);
+      console.log(computer.total);
+    }
+    this.showCardsExceptLastCards(computer.hand, computer.id);
+  }
 };

@@ -105,6 +105,16 @@ $(document).ready(() => {
     $("#score").empty().append(`Your current total is ${human.total}`);
     __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].isGameOver(human, computer);
   });
+
+  $("#stick").click(() => {
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].stick(human);
+    $("#score").empty().append(`Your final total is ${human.total}`);
+    $("#buttons").hide();
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].showAllCards(computer.hand, computer.id);
+    console.log(computer.total);
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].computerHit(computer, cards);
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].isGameOver(human, computer);
+  });
 });
 
 
@@ -121,6 +131,7 @@ $(document).ready(() => {
 
 
 const game = {
+  hasStick: false,
   start: (human, computer, cards) => {
     for (let i = 0; i < 2; i++) {
       human.hand.push(Object(__WEBPACK_IMPORTED_MODULE_1__deck__["a" /* deal */])(cards));
@@ -152,6 +163,10 @@ const game = {
   hit: (playerHand, cards) => {
     playerHand.push(Object(__WEBPACK_IMPORTED_MODULE_1__deck__["a" /* deal */])(cards));
   },
+  stick(human, hasStick) {
+    human.total = Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["a" /* calculateTotal */])(human.hand);
+    this.hasStick = true;
+  },
   isGameOver(human, computer) {
     if (Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["b" /* checkForEarlyFinish */])(human.total, computer.total) !== undefined) {
       $("#announcement").append(Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["b" /* checkForEarlyFinish */])(human.total, computer.total));
@@ -161,6 +176,14 @@ const game = {
     }
     return false;
   },
+  computerHit(computer, cards) {
+    if (computer.total < 17 && this.hasStick) {
+      this.hit(computer.hand, cards);
+      computer.total = Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["a" /* calculateTotal */])(computer.hand);
+      console.log(computer.total);
+    }
+    this.showCardsExceptLastCards(computer.hand, computer.id);
+  }
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = game;
 
