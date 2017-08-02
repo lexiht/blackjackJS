@@ -14,5 +14,12 @@ $(document).ready(() => {
     $("h4").show();
     game.showAllCards(human.hand, human.id);
     game.showCardsExceptLastCards(computer.hand, computer.id);
+    human.total = calculateTotal(human.hand);
+    $("#score").append(`Your current total is ${human.total}`);
+    if (human.total < 21) {
+      $("#buttons").show();
+    }
+    computer.total = calculateTotal(computer.hand);
+    game.isGameOver(human, computer);
   });
 });

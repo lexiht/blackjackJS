@@ -31,5 +31,14 @@ export const game = {
         $(`#${card}`).attr("src", populateCards()[card]);
       }
     }
-  }
+  },
+  isGameOver(human, computer) {
+    if (checkForEarlyFinish(human.total, computer.total) !== undefined) {
+      $("#announcement").append(checkForEarlyFinish(human.total, computer.total));
+      this.showAllCards(computer.hand, computer.id);
+      $("#buttons").hide();
+      return;
+    }
+    return false;
+  },
 };

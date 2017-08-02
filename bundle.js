@@ -89,6 +89,13 @@ $(document).ready(() => {
     $("h4").show();
     __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].showAllCards(human.hand, human.id);
     __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].showCardsExceptLastCards(computer.hand, computer.id);
+    human.total = Object(__WEBPACK_IMPORTED_MODULE_1__blackjack__["a" /* calculateTotal */])(human.hand);
+    $("#score").append(`Your current total is ${human.total}`);
+    if (human.total < 21) {
+      $("#buttons").show();
+    }
+    computer.total = Object(__WEBPACK_IMPORTED_MODULE_1__blackjack__["a" /* calculateTotal */])(computer.hand);
+    __WEBPACK_IMPORTED_MODULE_0__game__["a" /* game */].isGameOver(human, computer);
   });
 });
 
@@ -133,7 +140,16 @@ const game = {
         $(`#${card}`).attr("src", Object(__WEBPACK_IMPORTED_MODULE_1__deck__["b" /* populateCards */])()[card]);
       }
     }
-  }
+  },
+  isGameOver(human, computer) {
+    if (Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["b" /* checkForEarlyFinish */])(human.total, computer.total) !== undefined) {
+      $("#announcement").append(Object(__WEBPACK_IMPORTED_MODULE_0__blackjack__["b" /* checkForEarlyFinish */])(human.total, computer.total));
+      this.showAllCards(computer.hand, computer.id);
+      $("#buttons").hide();
+      return;
+    }
+    return false;
+  },
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = game;
 
@@ -177,7 +193,7 @@ const calculateTotal = (cards) => {
   }
   return total;
 };
-/* unused harmony export calculateTotal */
+/* harmony export (immutable) */ __webpack_exports__["a"] = calculateTotal;
 
 
 const checkForEarlyFinish = (humanTotal, computerTotal) => {
@@ -193,7 +209,7 @@ const checkForEarlyFinish = (humanTotal, computerTotal) => {
     return;
   }
 };
-/* unused harmony export checkForEarlyFinish */
+/* harmony export (immutable) */ __webpack_exports__["b"] = checkForEarlyFinish;
 
 
 const gameoverAnnouncement = (humanTotal, computerTotal) => {
